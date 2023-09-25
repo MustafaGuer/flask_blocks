@@ -6,35 +6,21 @@ from models.transaction import Transaction
 
 class Block:
     def __init__(
-        self,
-        index: int,
-        transactions: List[Transaction],
-        prev_hash: str,
-        difficulty: int,
-    ) -> None:
+        self, index: int, transactions: List[Transaction], prev_hash: str, timestamp
+    ):
         self.index = index
         self.transactions = transactions
         self.prev_hash = prev_hash
 
         self.name = "Genesis Block" if index == 0 else f"Block {index}"
 
-        self.time = time()
-        self.difficulty = difficulty
+        self.nonce = 0
+        self.timestamp = timestamp
         self.hash = self.calculate_hash()
 
     def calculate_hash(self):
-        nonce = 0
-        str_to_hash = (
-            str(self.index)
-            + str(self.transactions)
-            + str(self.prev_hash)
-            + str(self.time)
-        )
-        curr_hash = hash(str_to_hash.encode("utf-8")).hexdigest()
-        while not curr_hash.startswith("0" * self.difficulty):
-            curr_hash = hash((str_to_hash + str(nonce)).encode("utf-8")).hexdigest()
-            nonce += 1
-        return curr_hash
+        data = f"{self.index}{self.name}{self.timestamp}{self.transactions}{self.nonce}{self.prev_hash}"
+        return hash(data.encode()).hexdigest()
 
 
 # if __name__ == "__main__":

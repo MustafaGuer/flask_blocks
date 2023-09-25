@@ -1,4 +1,5 @@
 from time import time
+from datetime import datetime
 
 
 class Transaction:
@@ -9,4 +10,5 @@ class Transaction:
         self.receiver = receiver
         self.amount = amount
 
-        self.time = time()
+        self.timestamp = time()
+        self.datetime = datetime.now()

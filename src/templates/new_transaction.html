@@ -1,18 +1,28 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% set active_page = 'new_transaction' %} {% block
+content %}
 
-<center>
+<div class="new-transaction">
   <form action="/transaction" method="POST">
-    <label for="sender">Sender</label>
-    <input type="text" name="sender" placeholder="Bitte Sender eintragen" />
-    <label for="receiver">Empfänger</label>
-    <input
-      type="text"
-      name="receiver"
-      placeholder="Bitte Empfänger eintragen"
-    />
-    <label for="amount">Betrag</label>
-    <input type="text" name="amount" placeholder="Bitte Betrag eingeben" />
-    <button type="submit">Abschicken</button>
+    <div class="form-group">
+      <label for="sender">Sender</label>
+      <input type="text" name="sender" placeholder="Bitte Sender eintragen" />
+    </div>
+    <div class="form-group">
+      <label for="receiver">Empfänger</label>
+      <input
+        type="text"
+        name="receiver"
+        placeholder="Bitte Empfänger eintragen"
+      />
+    </div>
+    <div class="form-group">
+      <label for="amount">Betrag</label>
+      <input type="text" name="amount" placeholder="Bitte Betrag eingeben" />
+    </div>
+    <div class="form-actions"><button type="submit">Abschicken</button></div>
+    {% if error %}
+    <p class="error">{{error}}</p>
+    {% endif %}
   </form>
-</center>
+</div>
 {% endblock %}

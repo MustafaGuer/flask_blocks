@@ -3,16 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
     <title>Flask App</title>
   </head>
   <body>
-    <center style="margin-bottom: 10px">
-      <a href="/">Home</a>
-      <a href="/transaction">New Transaction</a>
-      <a href="/transactions">Transactions</a>
-      <a href="/blockchain">Blockchain</a>
-    </center>
+    <header>
+      {% set active_page=active_page|default('index') %}
+      <div></div>
+      <nav>
+        <a href="/" class="{% if active_page == 'index' %} active {% endif %}">Home</a>
+        <a href="/transaction" class="{% if active_page == 'new_transaction' %} active {% endif %}">New Transaction</a>
+        <a href="/transactions" class="{% if active_page == 'transactions' %} active {% endif %}">Open Transactions</a>
+        <a href="/blockchain" class="{% if active_page == 'blockchain' %} active {% endif %}">Blockchain</a>
+      </nav>
+    </header>
     {% block content %}{% endblock %}
   </body>
 </html>
