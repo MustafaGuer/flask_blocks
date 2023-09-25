@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block content %}
+<center>
+  <h2>
+    Transaktions Id: {{transaction.id}} <br />
+    Absender: {{transaction.receiver}} <br />
+    Empfänger: {{transaction.sender}} <br />
+    Menge: {{transaction.amount}} Coins
+  </h2>
+</center>
+{% endblock %}

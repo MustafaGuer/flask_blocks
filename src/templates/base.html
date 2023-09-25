@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/css/styles.css" />
+    <title>Flask App</title>
+  </head>
+  <body>
+    <center style="margin-bottom: 10px">
+      <a href="/">Home</a>
+      <a href="/transaction">New Transaction</a>
+      <a href="/transactions">Transactions</a>
+      <a href="/blockchain">Blockchain</a>
+    </center>
+    {% block content %}{% endblock %}
+  </body>
+</html>

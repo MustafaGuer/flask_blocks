@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  {% for bblock in blockchain %}
+  <div
+    style="
+      border: 1px solid gray;
+      box-shadow: 1px 2px 1px 4px rgba(0, 0, 0, 0.25);
+      width: fit-content;
+      padding: 8px;
+    "
+  >
+    <h3 style="text-align: center">{{bblock.name}}</h3>
+    <ul>
+      <li>Index: {{bblock.index}}</li>
+      <li>Hash: {{bblock.hash}}</li>
+      <li>Previous Hash: {{bblock.prev_hash}}</li>
+      <h4 style="margin: 4px 0">Transactions:</h4>
+      {% for transaction in bblock.transactions %}
+      <li>
+        Id: {{ transaction.id }}, {{ transaction.sender }} schickt
+        {{transaction.receiver }} {{ transaction.amount }} Coins
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

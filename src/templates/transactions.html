@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+{% block content %}
+<center>
+  {% if transactions_there %}
+  <h2>Open transactions</h2>
+  <ul>
+    {% for transaction in transactions %}
+    <li><a href="/transactions/{{transaction['id']}}">{{transaction["sender"]}} schickt {{transaction["receiver"]}} {{transaction["amount"]}} Coins</a></li>
+    {% endfor %}
+  </ul>
+  <form action="/mine">
+    <button type="submit">Submit</button>
+  </form>
+  {% else %}
+  <h2>No open Transactions</h2>
+  {% endif %}
+</center>
+{% endblock %}
