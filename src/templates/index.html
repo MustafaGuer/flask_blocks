@@ -1,3 +1,26 @@
 {% extends "base.html" %} {% set active_page = 'index' %} {% block content %}
-<h1 style="text-align: center">Welcome to my BC-APP</h1>
+<div class="container">
+  <h1 style="text-align: center">Welcome to my BC-APP</h1>
+
+  {% if coins %}
+  <table class="coins-table">
+    <thead>
+      <th>Symbol</th>
+      <th>Price</th>
+      <th>Volume</th>
+    </thead>
+    <tbody>
+      {% for coin in coins %}
+      <tr>
+        <td>{{coin["symbol"]}}</td>
+        <td>{{"$%.2f"|format(coin["last_trade_price"])}}</td>
+        <td>{{ "%.2f"|format(coin["volume_24h"])}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %} {% if error %}
+  <p class="error">{{error}}</p>
+  {% endif %}
+</div>
 {% endblock %}

@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+.container {
+  padding: 0 3rem;
+}
+
 header {
   padding: 1rem 2rem;
   display: flex;
@@ -29,10 +33,10 @@ header nav a:hover {
 }
 
 .error {
-    color: red;
-    width: 100%;
-    text-align: center;
-    margin: 0;
+  color: red;
+  width: 100%;
+  text-align: center;
+  margin: 0;
 }
 
 .new-transaction {
@@ -90,4 +94,44 @@ header nav a:hover {
 .form-actions button:hover,
 .form-actions button:active {
   background-color: #01bb01;
+}
+
+.coins-table {
+  display: block;
+  height: 300px;
+  width: fit-content;
+  overflow-y: scroll;
+}
+
+.coins-table td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.coins-table tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #750594 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #750594;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
 }

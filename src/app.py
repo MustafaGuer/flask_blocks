@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-
+import requests
 from typing import List
 from models.transaction import Transaction
 from models.blockchain import Blockchain
@@ -18,7 +18,16 @@ transactions = Mempool()
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    response = requests.get("https://api.blockchain.com/v3/exchange/tickers/")
+
+    if response.status_code == 200:
+        data = response.json()
+        return render_template("index.html", coins=data)
+    else:
+        return render_template(
+            "index.html",
+            error="Fehler beim laden der aktuellen Daten.",
+        )
 
 
 # Routing
@@ -96,10 +105,16 @@ def transaction_detail(transaction_id):
 @app.route("/mine")
 def mine():
     global transactions
-    block = Block(len(blockchain.chain), transactions, blockchain.chain[-1].hash, 2)
+    block = Block(
+        len(blockchain.chain),
+        transactions.pending_transactions,
+        blockchain.chain[-1].hash,
+        2,
+    )
     blockchain.add_block(block)
-    transactions = []
+    transactions.pending_transactions = []
     print("MINING DONE")
+
     return redirect("/blockchain")
     # return render_template("blockchain.html", blokchain_there=True, blockchain=blockchain.blocks)
 
