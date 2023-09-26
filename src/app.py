@@ -5,6 +5,7 @@ from models.transaction import Transaction
 from models.blockchain import Blockchain
 from models.block import Block
 from models.mempool import Mempool
+import numpy as np
 
 app = Flask(__name__)
 
@@ -22,11 +23,14 @@ def home():
 
     if response.status_code == 200:
         data = response.json()
-        return render_template("index.html", coins=data)
+        coins = np.array(data)
+
+        return render_template("index.html", coins=coins, coins_exist=True)
     else:
         return render_template(
             "index.html",
             error="Fehler beim laden der aktuellen Daten.",
+            coins_exist=False,
         )
 
 
