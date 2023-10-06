@@ -13,7 +13,6 @@ app = Flask(__name__)
 blockchain = Blockchain()
 
 # Mempool
-# transactions: List[Transaction] = []
 transactions = Mempool()
 
 
@@ -35,33 +34,23 @@ def home():
 
 
 # Routing
-# Methods vorher definieren, sonst 405: Method Not Allowed
 @app.route("/transaction", methods=["POST", "GET"])
 def transaction_form():
-    # Check ob POST-Daten vom Formular vorliegen
-
     if request.method == "POST":
         print("Formular wurde abgeschickt")
 
-        # Daten verarbeiten
-        # Sender von Anfrage an Server abgreifen
-        sender = request.form["sender"]  # new_transaction.html: name="sender"
+        sender = request.form["sender"]
         receiver = request.form["receiver"]
         amount = request.form["amount"]
-        # Testausgabe in der Konsole
-        # print(sender, receiver, amount)
         if sender == "" or receiver == "" or amount == "":
             return render_template(
                 "new_transaction.html", error="Bitte alle Felder ausfüllen!"
             )
 
-        # Transaktion erstellen
         transaction = Transaction(
             len(transactions.pending_transactions), sender, receiver, amount
         )
 
-        # aktuelle Transaktion aus dem Formular in den Mempool übertragen
-        # transactions.append("{0} schickt {1} {2} Coins".format(sender, receiver, amount))
         transactions.pending_transactions.append(transaction)
 
         return render_template(
@@ -71,7 +60,6 @@ def transaction_form():
         )
 
     else:
-        # Formular anzeigen
         return render_template("new_transaction.html")
 
 
@@ -98,12 +86,6 @@ def transaction_detail(transaction_id):
             return render_template("transaction.html", transaction=transaction)
 
     return render_template("404.html")
-    # return "<h2>{} schickt {} {} Coins</h2>".format(transaction["sender"], transaction["receiver"], transaction["amount"])
-
-    # if transaction in transactions:
-    #     return "<h2>{}</h2>".format(transaction)
-    # else:
-    #     return render_template("404.html")
 
 
 @app.route("/mine")
@@ -120,7 +102,6 @@ def mine():
     print("MINING DONE")
 
     return redirect("/blockchain")
-    # return render_template("blockchain.html", blokchain_there=True, blockchain=blockchain.blocks)
 
 
 @app.route("/blockchain")
@@ -128,5 +109,4 @@ def blockchain_page():
     return render_template("blockchain.html", blockchain=blockchain.chain)
 
 
-# Server starten
 app.run(debug=True)

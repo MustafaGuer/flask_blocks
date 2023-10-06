@@ -101,6 +101,7 @@ header nav a:hover {
   height: 300px;
   width: fit-content;
   overflow-y: scroll;
+  margin: 3rem auto;
 }
 
 .coins-table td,
