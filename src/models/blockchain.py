@@ -11,7 +11,7 @@ class Blockchain:
         self.chain: List[Block] = [self.create_genesis_block()]
 
     def create_genesis_block(self):
-        return Block(0, [Transaction(0, "Foo", "Bar", "50")], "0", time())
+        return Block(0, [Transaction(0, "Vitalik Buterin", "Satoshi Nakamoto", "50")], "0", time())
 
     def get_last_block(self):
         return self.chain[-1]
